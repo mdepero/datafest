@@ -3,21 +3,28 @@
  * DataFest 2017 - Miami University
  */
 
+var something = 10;
+
 function start() {
 	new Morris.Line({
 	  element: 'test-chart',
 	  data: [
-	    { y: 'a', a: 5, b: 1 },
-	    { y: 'b', a: 10,  b: 2 },
-	    { y: 'c', a: 15,  b: 3 },
-	    { y: 'd', a: 10,  b: 4 },
-	    { y: 'e', a: 5,  b: 5 },
-	    { y: 'f', a: 10,  b: 6 },
-	    { y: 'g', a: 0, b: 7 }
+	    { y: 1, a: 0 },
+	    { y: 2, a: 2 },
+	    { y: 3, a: 5 },
+	    { y: 4, a: 15 },
+	    { y: 5, a: 7 },
+	    { y: 6, a: 2 },
+	    { y: 7, a: 1 }
 	  ],
 	  xkey: 'y',
-	  ykeys: ['a', 'b'],
-	  labels: ['Series A', 'Series B']
+	  ykeys: ['a'],
+	  labels: ['Series A', 'Series B'],
+	  resize: true,
+	  axes: false,
+	  hideHover: 'always',
+	  events: [5],
+	  eventStrokeWidth: 4
 	});
 }
 
