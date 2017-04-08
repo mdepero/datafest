@@ -6,6 +6,10 @@
 
 /* Global Styles */
 
+div.chart {
+    height:200px;
+}
+
 body {
     margin-top: 100px;
     background-color: #222;
