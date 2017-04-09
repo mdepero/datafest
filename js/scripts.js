@@ -104,12 +104,19 @@ function dataReturnCallbackTest(data) {
 	//console.log(JSON.parse(data));
 }
 
-
 function dataReturnCallback(data) {
 
 	console.log(data);
 
 	rawData = JSON.parse(data);
+
+	$('#count_container').show();
+
+	var locality = "";
+	if (rawData.local) locality = rawData.n+" hotels in your competitive region.";
+	else locality = " all hotels globally.";
+
+	$('#counts').html("Showing data from "+locality);
 
 	if(rawData.setValues.branded != "1") $('#branded').html("You are NOT branded.");
 	else $('#branded').html("You are branded.");
@@ -135,8 +142,9 @@ function dataReturnCallback(data) {
 			break;
 	}
 
+
 	$('#test-chart-1-container').html('<div id="test-chart-1-percent"></div><div class="chart" id="test-chart-1"></div>');
-	$('#test-chart-1-percent').html(rawData.dataSets[1].target/40);
+	$('#test-chart-1-percent').html(data_text(Math.round((rawData.dataSets[1].better_than/rawData.n)*100)));
 
 	new Morris.Line({
 	  element: 'test-chart-1',
@@ -147,11 +155,12 @@ function dataReturnCallback(data) {
 	  axes: false,
 	  hideHover: 'always',
 	  events: [rawData.dataSets[1].target],
-	  eventStrokeWidth: 4
+	  eventStrokeWidth: 4,
+	  fillOpacity: .3
 	});
 
 	$('#test-chart-2-container').html('<div id="test-chart-2-percent"></div><div class="chart" id="test-chart-2"></div>');
-	$('#test-chart-2-percent').html(rawData.dataSets[2].target/40);
+	$('#test-chart-2-percent').html(data_text(Math.round((rawData.dataSets[2].better_than/rawData.n)*100)));
 
 	new Morris.Line({
 	  element: 'test-chart-2',
@@ -166,7 +175,7 @@ function dataReturnCallback(data) {
 	});
 
 	$('#test-chart-3-container').html('<div id="test-chart-3-percent"></div><div class="chart" id="test-chart-3"></div>');
-	$('#test-chart-3-percent').html(rawData.dataSets[0].target/40);
+	$('#test-chart-3-percent').html(data_text(Math.round((rawData.dataSets[0].better_than/rawData.n)*100)));
 
 	new Morris.Line({
 	  element: 'test-chart-3',
@@ -184,6 +193,19 @@ function dataReturnCallback(data) {
 	$('#run').prop('disabled',false);
 
 	
+}
+
+
+function data_text(val){
+	var ret = "Better than "+val+"% of hotels. ";
+
+	if (val >=50) {
+		ret += '<i class="fa fa-arrow-up" style="color:green;"></i>';
+	}else{
+		ret += '<i class="fa fa-arrow-down" style="color:red;"></i>';
+	}
+
+	return ret;
 }
 
 
