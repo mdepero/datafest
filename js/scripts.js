@@ -21,15 +21,39 @@ var something = 10;
 
 var rawData;
 
+var destID = "";
 
 function start() {
 	if (getQueryVariable('id') == '' || getQueryVariable('id')===undefined) {
 		window.location = './start';
 	}else{
-		//getCurrentData();
+		getDistrictIds();
 	}
 
 	$('#run').click(getCurrentData);
+}
+
+function getDistrictIds() {
+	$.post(
+		"http://localhost:8008/dests.php",
+	    {
+	        id: getQueryVariable('id')
+	    },
+    	destListCallback
+	);
+}
+
+function destListCallback(data) {
+	console.log(data);
+
+	var destRawData = JSON.parse(data);
+	var first = true;
+	destID = "(";
+	destRawData.forEach(function myFunction(item, index) {
+		if(first) first = false;
+		else $destID += ',';
+		destID += "'"+item+"'";
+	});
 }
 
 function getCurrentData() {
@@ -53,7 +77,7 @@ function getCurrentData() {
 	sql += ')';
 	console.log(sql);
 	$.post(
-		"http://localhost:8008/",
+		"http://localhost:8008/index.php",
 	    {
 	        query: sql,
 	        id: getQueryVariable('id')
