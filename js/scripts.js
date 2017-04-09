@@ -30,6 +30,8 @@ function start() {
 		getDistrictIds();
 	}
 
+	$('#hotel_name').html(getQueryVariable('id'));
+
 	$('#run').click(getCurrentData);
 }
 
@@ -44,19 +46,25 @@ function getDistrictIds() {
 }
 
 function destListCallback(data) {
-	console.log(data);
+	// console.log(data); return;
 
 	var destRawData = JSON.parse(data);
 	var first = true;
-	destID = "(";
+	destID = "HotelID in (";
 	destRawData.forEach(function myFunction(item, index) {
 		if(first) first = false;
-		else $destID += ',';
+		else destID += ',';
 		destID += "'"+item+"'";
 	});
+	destID += ")";
+
+	$('#run').prop('disabled',false);
+	// console.log(destID);
 }
 
 function getCurrentData() {
+	$('#run').prop('disabled',true);
+
 	console.log("Sending request...");
 	var sql = "SELECT * FROM Clicks WHERE ";
 	var label = "";
@@ -74,7 +82,12 @@ function getCurrentData() {
                 }
            }
 	});
-	sql += ')';
+	if(first == false)
+		sql += ')';
+	if($("input[name='District']:checked").val() == "1") {
+		if (first == false) sql += ' AND ';
+		sql += destID;
+	}
 	console.log(sql);
 	$.post(
 		"http://localhost:8008/index.php",
@@ -166,6 +179,9 @@ function dataReturnCallback(data) {
 	  events: [rawData.dataSets[0].target],
 	  eventStrokeWidth: 4
 	});
+
+
+	$('#run').prop('disabled',false);
 
 	
 }
