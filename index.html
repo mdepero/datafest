@@ -41,7 +41,8 @@ layout: default
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Gross Bookings</h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body" id="test-chart-2-container">
+                                <div id="test-chart-2-percent"></div>
                                 <div class="chart" id="test-chart-2"></div>
                             </div>
                         </div>
@@ -52,7 +53,8 @@ layout: default
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Click to Book Conversion</h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body" id="test-chart-3-container">
+                                <div id="test-chart-3-percent"></div>
                                 <div class="chart" id="test-chart-3"></div>
                             </div>
                         </div>
@@ -97,6 +99,7 @@ layout: default
                                 <h3 class="panel-title"><i class="fa fa-filter fa-fw"></i> Branded</h3>
                             </div>
                             <div class="panel-body">
+                                <div id="branded"></div>
                                 <form id="mobile">
                                     <input type="checkbox" name="Branded" value="1" checked> Yes<br/>
                                     <input type="checkbox" name="Branded" value="0" checked> No
@@ -111,6 +114,7 @@ layout: default
                                 <h3 class="panel-title"><i class="fa fa-filter fa-fw"></i> Rating</h3>
                             </div>
                             <div class="panel-body">
+                                <div id="ratings"></div>
                                 <form id="mobile">
                                     <input type="checkbox" name="Rating" value="0" checked> Not Rated<br/>
                                     <input type="checkbox" name="Rating" value="1" checked> 1<br/>
@@ -163,6 +167,7 @@ layout: default
                                 <h3 class="panel-title"><i class="fa fa-filter fa-fw"></i> Popularity</h3>
                             </div>
                             <div class="panel-body">
+                                <div id="popularity"></div>
                                 <form id="mobile">
                                     <input type="checkbox" name="Popularity" value="VH" checked> Very High<br/>
                                     <input type="checkbox" name="Popularity" value="H" checked> High<br/>
